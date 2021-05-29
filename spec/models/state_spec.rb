@@ -4,6 +4,7 @@ RSpec.describe State, type: :model do
   before(:all) do
     @state = create(:state)
   end
+
   context "Validations" do
     it "is valid with valid attributes" do
       state = create(:state)
@@ -29,5 +30,9 @@ RSpec.describe State, type: :model do
       state2 = build(:state, population: nil)
       expect(state2).to_not be_valid
     end
+  end
+
+  context "Associations" do 
+    it {should have_many(:facts)}
   end
 end
