@@ -5,7 +5,8 @@ class CreateFacts < ActiveRecord::Migration[6.1]
       t.text :details
       t.float :lat
       t.float :lng
-
+      t.references :state
+      
       t.timestamps
     end
   end
