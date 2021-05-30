@@ -6,10 +6,7 @@
 
 // call buildMap(params = {}) after document ready
 
-
 var map;
-
-var activeStates = ['CO', 'NM']
 
 var defaultMapParams = {
     lat: 40,
@@ -35,6 +32,7 @@ function buildMap(params = {}) {
         preferCanvas: mapParams["preferCanvas"]
     });
 
+    // add visual tiles
     L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY29saW50YWxleCIsImEiOiJja3BhdGEydTQwc2xzMm9vMWdhazg0ZmhuIn0.bog-VCj1Y2vySFOQ100GFw', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
@@ -44,6 +42,7 @@ function buildMap(params = {}) {
         accessToken: 'your.mapbox.access.token'
     }).addTo(map);
 
+    // add geoJson layer
     visibleStates = usaGeoJson["features"].filter( e => activeStates.includes(e['properties']['STUSPS']))
     L.geoJSON(visibleStates).addTo(map);
 
