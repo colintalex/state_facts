@@ -5,6 +5,7 @@
 //= require jquery_ujs
 //= require leaflet
 
+var activeStates = ['CO', 'NM', 'TX']
 
 $(document).ready(function () {
     buildMap(params = {})
