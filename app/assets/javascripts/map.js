@@ -9,6 +9,8 @@
 
 var map;
 
+var activeStates = ['CO', 'NM']
+
 var defaultMapParams = {
     lat: 40,
     lng: -104.991531,
@@ -41,6 +43,9 @@ function buildMap(params = {}) {
         zoomOffset: -1,
         accessToken: 'your.mapbox.access.token'
     }).addTo(map);
+
+    visibleStates = usaGeoJson["features"].filter( e => activeStates.includes(e['properties']['STUSPS']))
+    L.geoJSON(visibleStates).addTo(map);
 
     if (mapParams["zoomHomeControl"])
         map.addControl(new L.Control.zoomHome());
