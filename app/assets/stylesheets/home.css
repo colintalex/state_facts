@@ -2,15 +2,18 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+
+#main-container {
+  display: flex;
+}
+
 #map {
   height: 800px;
   width: 50%;
-  display: inline-block;
 }
 
-#content {
-  width: 49%;
+#state-info-container {
+  width: 50%;
   height: 800px;
   background: beige;
-  display: inline-block;
 }
