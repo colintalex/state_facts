@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Home Page', type: :feature do 
-    scenario "When page loads" do
+    xscenario "When page loads" do
         describe "Main Map" do
             it "should only load the 2 available states" do
                 
@@ -17,7 +17,7 @@ RSpec.describe 'Home Page', type: :feature do
     end
 
 
-    scenario "When first State is selected" do
+    xscenario "When first State is selected" do
         describe "Main Map" do
             it "should zoom/center selected state, no markers" do
 
@@ -31,7 +31,7 @@ RSpec.describe 'Home Page', type: :feature do
         end
     end
 
-    scenario "When succeeding state(s) are selected" do
+    xscenario "When succeeding state(s) are selected" do
         describe "Main Map" do
             it "should clear markers and zoom/move to next state (same state selection applies" do
 
@@ -40,7 +40,7 @@ RSpec.describe 'Home Page', type: :feature do
 
         describe "Sidebar" do
             it "should clear old information and replace with new" do
-                
+
             end
         end
     end
