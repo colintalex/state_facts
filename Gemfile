@@ -14,7 +14,7 @@ gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.2'
 gem 'jquery-rails', '~> 4.4'
 gem 'leaflet-rails', '~> 1.7'
 gem 'terser', '~> 1.1', '>= 1.1.3'
-
+gem 'turbolinks'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -24,6 +24,8 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 4.0.1'
   gem 'shoulda-matchers', '~> 4.2'
+  gem "capybara"
+  gem "pry"
 end
 
 group :development do
