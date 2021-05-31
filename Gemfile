@@ -24,6 +24,8 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 4.0.1'
   gem 'shoulda-matchers', '~> 4.2'
+  gem "capybara"
+  gem "pry"
 end
 
 group :development do
