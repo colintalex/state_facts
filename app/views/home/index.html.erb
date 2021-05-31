@@ -4,7 +4,7 @@
     <div id='map'></div>
     <div id='state-info-container'>
             <select id="myselect">
-                <%= @state_name.each do |s| %>
+                <%= @state_names.each do |s| %>
                     <option value=<%= s[:id] %>>
                         <%= s[:name] %>
                     </option>
