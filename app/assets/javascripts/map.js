@@ -19,7 +19,7 @@ var defaultMapParams = {
     fullScreenControl: true
 }
 
-var myStyle = {
+var stateStyle = {
     "color": "#00c128",
     "weight": 2,
     "opacity": 0.65
@@ -52,7 +52,7 @@ function buildMap(params = {}) {
     // add geoJson layer
     visibleStates = usaGeoJson["features"].filter( e => activeStates.includes(e['properties']['NAME']))
     L.geoJSON(visibleStates, {
-        style: myStyle
+        style: stateStyle
     }).addTo(map);
 
     if (mapParams["zoomHomeControl"])
