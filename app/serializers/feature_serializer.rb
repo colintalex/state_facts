@@ -7,6 +7,7 @@ class FeatureSerializer < ActiveModel::Serializer
 
   def properties
     {
+      "id": object.id,
       "name": object.title,
       "amenity": "",
       "popupContent": object.details
