@@ -16,14 +16,14 @@ puts "Seeding DB..."
         population: 5893634
     )
     CO.facts.create(
-        title: "Coors Field",
-        details: "Home of the Colorado Rockies!",
+        title: "The Home of the Colorado Rockies is in historic Coors Field.",
+        details: "Built in 18328",
         lat: 39.75567607730272,
         lng: -104.99419955953775
     )
     CO.facts.create(
-        title: "Mount Evans",
-        details: "Highest Mountain and Road in Colorado, 14,271 ft above sea-level",
+        title: "Mount Evans is the Highest Mountain Peak in Colorado",
+        details: "14,271 ft above sea-level",
         lat: 39.5889610668807,
         lng: -105.64404320421464
     )
