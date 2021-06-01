@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe State, type: :model do
   before(:all) do
+    State.destroy_all
     @state = create(:state)
   end
 
   context "Validations" do
     it "is valid with valid attributes" do
-      state = create(:state)
-      expect(state).to be_valid
+      expect(@state).to be_valid
     end
     it "is not valid without a name" do
       state2 = build(:state, name: nil)

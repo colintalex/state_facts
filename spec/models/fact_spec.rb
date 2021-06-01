@@ -2,15 +2,14 @@ require 'rails_helper'
 
 RSpec.describe Fact, type: :model do
   before(:all) do
-    @state = create(:state)
+    Fact.destroy_all
     @fact = create(:fact)
   end
   describe "Validations" do
     it { should validate_presence_of(:state) }
 
     it "is valid with valid attributes" do
-      fact = create(:fact)
-      expect(fact).to be_valid
+      expect(@fact).to be_valid
     end
     it "is not valid without a title" do
       fact2 = build(:fact, title: nil)
