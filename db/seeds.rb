@@ -27,6 +27,12 @@ puts "Seeding DB..."
         lat: 39.5889610668807,
         lng: -105.64404320421464
     )
+    CO.facts.create(
+        title: "Million Dollar Highway, Colorado's Most Expensive and Most Dangerous Road",
+        details: "Road to Telluride, avg cost/mile was over 1 million dollars!",
+        lat: 37.831519351822315,
+        lng: -107.72417215942954
+    )
 
 
     NM = State.create(
@@ -45,6 +51,12 @@ puts "Seeding DB..."
     NM.facts.create(
         title: "Wheeler Peak",
         details: "Highest Mountain in New Mexico, 13,167 ft above sea-level",
+        lat: 36.55761242008017,
+        lng: -105.41679801330899
+    )
+    NM.facts.create(
+        title: "Billy the Kid’s Black Hill Hideout",
+        details: "Used as hideout in 1880 for Billy and three members of his gang",
         lat: 36.55761242008017,
         lng: -105.41679801330899
     )
