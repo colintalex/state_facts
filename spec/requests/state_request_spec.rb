@@ -1,4 +1,5 @@
 require 'rails_helper'
+include ActionView::Helpers::NumberHelper
 
 RSpec.describe 'State Requests', type: :request do
     before(:all) do
@@ -16,7 +17,7 @@ RSpec.describe 'State Requests', type: :request do
             expect(resp[:description]).to eql(@state.description)
             expect(resp[:flag_image]).to eql(@state.flag_image)
             expect(resp[:capitol_name]).to eql(@state.capitol_name)
-            expect(resp[:population]).to eql(@state.population)
+            expect(resp[:population]).to eql(number_with_delimiter(@state.population))
         end
     end
 end
