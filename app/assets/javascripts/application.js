@@ -52,7 +52,7 @@ function clickAddMarkerToLayer(layer) {
             dataType: "json",
         })
             .done(function (json) {
-                addMarkerToLayer(digestFeature(json), layer)
+                addMarkerToLayer(json, layer)
             })
     })
 }
@@ -68,23 +68,6 @@ function getSingleState(stateId) {
         })
 }
 
-// Process Fact JSON into GeoJSON feature
-function digestFeature(fact) {
-    var feature = {
-        "type": "Feature",
-        "properties": {
-            "name": fact.title,
-            "amenity": "",
-            "popupContent": fact.details
-        },
-        "geometry": {
-            "type": "Point",
-            "coordinates": [fact.lng, fact.lat]
-        }
-    }
-    return feature
-}
-
 function addMarkerToLayer(feature, layer) {
     L.geoJSON(feature, {
         pointToLayer: function (feat, latlng) {
@@ -97,7 +80,7 @@ function addMarkerToLayer(feature, layer) {
 // Fills select HTML with corresponding state data
 function digestState(json) {
     $("#state-name").html(json.name)
-    $("#state-flag-image").html(json.flag_image)
+    $("#state-flag-image").attr("src", json.flag_image)
     $("#state-description").html(json.description)
     $("#state-capitol").html(json.capitol_name)
     $("#state-population").html(json.population)
