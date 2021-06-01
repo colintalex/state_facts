@@ -5,7 +5,7 @@
 //= require jquery_ujs
 //= require leaflet
 
-var activeStates = ['CO', 'NM', 'TX']
+var activeStates = []
 
 var geojsonFeature = {
     "type": "Feature",
@@ -29,6 +29,7 @@ var geojsonMarkerOptions = {
     fillOpacity: 0.8
 };
 
+// Binds popups to each marker
 function onEachFeature(feature, layer) {
     // does this feature have a property named popupContent?
     if (feature.properties && feature.properties.popupContent) {
@@ -37,8 +38,36 @@ function onEachFeature(feature, layer) {
 }
 
 $(document).ready(function () {
+    // Highlights only states available in dropdown menu (dropdown only lists whats in DB)
+    $('#myselect option').map((index, option) => activeStates.push((option.text)))
+
     buildMap(params = {})
-        
+    
+    // Event functionality for Search button
+    $("#search").click(function() {
+        // This extracts text from selected option
+        var selectedId = $("#myselect option:selected").val();
+        // ajax goes here
+        $.ajax({
+            url: '/states/' + selectedId,
+            type: "GET",
+            dataType: "json",
+        })
+        .done(function(json) {
+            $("#state-name").html(json.name)
+            $("#state-flag-image").html(json.flag_image)
+            $("#state-description").html(json.description)
+            $("#state-capitol").html(json.capitol_name)
+            $("#state-population").html(json.population)
+            $('#state-facts').empty()
+            // Adds new state facts
+            $.each(json.facts, function() {
+                $('#state-facts')
+                .append(`<li><a class="state-fact" id=${this.id}>${this.title}</a></li>`)
+            })
+        })
+    })
+
     // Adds custom points to leaflet
     // Temporary, will implement this inside ajax request
     L.geoJSON(geojsonFeature, {
