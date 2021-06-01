@@ -8,8 +8,13 @@ gem 'pg', '~> 1.1', '>= 1.1.4'
 gem 'puma', '~> 5.3', '>= 5.3.1'
 gem 'puma-daemon', '~> 0.1.2', require: false
 
+gem 'sass-rails', '>= 5'
+gem 'sprockets', '~> 4'
+gem 'sprockets-rails', :require => 'sprockets/railtie'
+
 gem 'awesome_print', '~> 1.8'
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootstrap', '~> 5.0.1'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.2'
 gem 'jquery-rails', '~> 4.4'
 gem 'leaflet-rails', '~> 1.7'
