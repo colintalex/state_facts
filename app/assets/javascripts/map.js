@@ -25,6 +25,7 @@ var myStyle = {
     "opacity": 0.65
 };
 
+
 function buildMap(params = {}) {
     var mapParams = $.extend({}, defaultMapParams, params);
 
@@ -49,7 +50,7 @@ function buildMap(params = {}) {
     }).addTo(map);
 
     // add geoJson layer
-    visibleStates = usaGeoJson["features"].filter( e => activeStates.includes(e['properties']['STUSPS']))
+    visibleStates = usaGeoJson["features"].filter( e => activeStates.includes(e['properties']['NAME']))
     L.geoJSON(visibleStates, {
         style: myStyle
     }).addTo(map);
