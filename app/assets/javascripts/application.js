@@ -4,6 +4,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require leaflet
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
 
 var activeStates = []
 
@@ -97,11 +100,12 @@ function addMarkerToLayer(feature, layer) {
 // Fills select HTML with corresponding state data
 function digestState(json) {
     $("#state-name").html(json.name)
-    $("#state-flag-image").html(json.flag_image)
+    $("#state-flag-image").attr("src", json.flag_image)
     $("#state-description").html(json.description)
-    $("#state-capitol").html(json.capitol_name)
-    $("#state-population").html(json.population)
-    $('#state-facts').empty()
+    $("#state-capitol").html(`State Capitol: ${json.capitol_name}`)
+    $("#state-population").html(`State Population: ${json.population}`)
+    $('ul#state-facts').empty()
+    $('#facts-header').show();
     // Adds new state facts
     $.each(json.facts, function () {
         $('#state-facts')
