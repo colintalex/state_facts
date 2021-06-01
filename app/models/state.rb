@@ -5,5 +5,5 @@ class State < ApplicationRecord
     validates :population, presence: true
     validates :capitol_name, presence: true
     validates :population, presence: true
-    has_many :facts
+    has_many :facts, dependent: :delete_all
 end

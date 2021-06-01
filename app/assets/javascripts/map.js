@@ -19,7 +19,7 @@ var defaultMapParams = {
     fullScreenControl: true
 }
 
-var myStyle = {
+var stateStyle = {
     "color": "#00c128",
     "weight": 2,
     "opacity": 0.65
@@ -41,7 +41,7 @@ function buildMap(params = {}) {
 
     // add visual tiles
     L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY29saW50YWxleCIsImEiOiJja3BhdGEydTQwc2xzMm9vMWdhazg0ZmhuIn0.bog-VCj1Y2vySFOQ100GFw', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a> | 2021 Sanborn. All rights reserved.',
         maxZoom: 18,
         id: 'mapbox/streets-v11',
         tileSize: 512,
@@ -52,7 +52,7 @@ function buildMap(params = {}) {
     // add geoJson layer
     visibleStates = usaGeoJson["features"].filter( e => activeStates.includes(e['properties']['NAME']))
     L.geoJSON(visibleStates, {
-        style: myStyle
+        style: stateStyle
     }).addTo(map);
 
     if (mapParams["zoomHomeControl"])

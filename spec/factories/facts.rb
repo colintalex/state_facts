@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :fact do
-    title { "MyString" }
-    details { "MyText" }
-    lat { 1.5 }
-    lng { 1.5 }
+    title { "Colorado" }
+    details { "State details" }
+    lat { 1.1231235 }
+    lng { 1.53123321 }
     association :state
   end
 end

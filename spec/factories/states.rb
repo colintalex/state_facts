@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :state do
-    name { "MyString" }
+    name { 'Colorado' }
     description { "MyText" }
-    flag_image { "MyString" }
-    capitol_name { "MyString" }
-    population { 1 }
+    flag_image { "img/url" }
+    capitol_name { "Denver" }
+    population { 2500031 }
   end
 end
