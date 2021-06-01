@@ -18,8 +18,8 @@ RSpec.describe 'Home Page', type: :feature do
     context "Sidebar" do 
         it "should load all HTML elements w/o content" do
             visit '/'
-            expect(page.has_css?('#state-info-container')).to eql(true)
-            within '#state-info-container' do
+            expect(page.has_css?('#state-info')).to eql(true)
+            within '#state-info' do
                 expect(page.has_css?('#myselect')).to eql(true)
                 expect(page.has_css?('button#search')).to eql(true)
                 expect(page.has_css?('#state-content')).to eql(true)
