@@ -1,0 +1,51 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require leaflet
+ *= require font-awesome
+ *=require home
+ */
+@import "bootstrap";
+
+@font-face {
+    font-family: 'ChambersSansOT-Black';
+    src: url('/assets/ChambersSansOT-Black.otf');
+}
+@font-face{
+    font-family: 'ChambersSansOT-BlackItalic';
+    src: url('/assets/ChambersSansOT-BlackItalic.otf');
+}
+@font-face{
+    font-family: 'ChambersSansOT-Bold';
+    src: url('/assets/ChambersSansOT-Bold.otf');
+}
+@font-face{
+    font-family: 'ChambersSansOT-BoldItalic';
+    src: url('/assets/ChambersSansOT-BoldItalic.otf');
+}
+@font-face{
+    font-family: 'ChambersSansOT-Italic';
+    src: url('/assets/ChambersSansOT-Italic.otf');
+}
+@font-face{
+    font-family: 'ChambersSansOT-Medium';
+    src: url('/assets/ChambersSansOT-Medium.otf');
+}
+@font-face{
+  font-family: 'ChambersSansOT-MediumItalic';
+  src: url('/assets/ChambersSansOT-MediumItalic.otf');
+}
+@font-face{
+    font-family: 'ChambersSansOT';
+    src: url('/assets/ChambersSansOT.otf');
+}
