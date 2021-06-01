@@ -5,6 +5,8 @@
 
 #main-container {
   display: flex;
+  padding: 0;
+  font-family: 'ChambersSansOT-Black';
 }
 
 #map {
@@ -12,12 +14,59 @@
   width: 50%;
 }
 
-#state-info-container {
+#state-info {
   width: 50%;
   height: 800px;
   background: beige;
 }
 
+#search-container {
+  text-align: left;
+  margin-top: 35px;
+}
+
+#dropdown-wrapper {
+    text-align: left;
+    width: 50%;
+    margin: auto;
+}
+.menu-header {
+  margin-bottom: 3px;
+}
+
+#myselect {
+  font-size: 1.3em;
+  width: 250px;
+  height: 36px;
+  vertical-align: middle;
+}
+
 #state-flag-image {
-  max-height: 250px;
+  height: 100px;
+  display: inline;
+}
+
+#state-name{
+  font-size: 3em;
+  display: inline;
+  vertical-align: bottom;
+  margin-left: 15px;
+  font-family: 'ChambersSansOT-Black';
+}
+
+#state-capitol {
+  margin-bottom: 0px;
+}
+
+#state-facts {
+  list-style: none;
+  padding-left: 0;
+}
+
+#facts-header {
+  display: none;
+}
+
+a {
+  text-decoration: none;
 }
