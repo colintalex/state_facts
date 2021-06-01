@@ -31,39 +31,27 @@ RSpec.describe 'Home Page', type: :feature do
             end
         end
     end
-
-
     context "Main Map" do
         it "should zoom/center selected state, no markers" do
-            # visit '/'
-
-            # click 'Search'
-            # save_and_open_page
-
-            # within '#state-info-container' do
-            #     expect(page).to have_content(@state1.name)
-            #     expect(page).to have_content(@state1.description)
-            end
+            
         end
     end
-
-        context "Sidebar" do
-            it "should show content for that state" do
-
-            end
+    
+    context "Sidebar" do
+        it "should show content for that state" do
+    
         end
-
-    xscenario "When succeeding state(s) are selected" do
-        context "Main Map" do
-            it "should clear markers and zoom/move to next state (same state selection applies" do
-
-            end
+    end
+    
+    context "Main Map" do
+        it "should clear markers and zoom/move to next state (same state selection applies" do
+    
         end
-
-        context "Sidebar" do
-            it "should clear old information and replace with new" do
-
-            end
+    end
+    
+    context "Sidebar" do
+        it "should clear old information and replace with new" do
+    
         end
     end
 end
