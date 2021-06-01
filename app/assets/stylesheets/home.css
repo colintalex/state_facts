@@ -17,3 +17,7 @@
   height: 800px;
   background: beige;
 }
+
+#state-flag-image {
+  max-height: 250px;
+}
