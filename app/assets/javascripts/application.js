@@ -68,6 +68,19 @@ $(document).ready(function () {
         })
     })
 
+    // Adds marker on click, On Body required for post append action
+    $('body').on('click', '.state-fact', function () {
+        console.log(`${this.attributes.id.value}`)
+        $.ajax({
+            url: `/facts/${this.id}`,
+            type: "GET",
+            dataType: "json",
+        })
+        .done(function(json) {
+            console.log(json)
+        })
+    })
+
     // Adds custom points to leaflet
     // Temporary, will implement this inside ajax request
     L.geoJSON(geojsonFeature, {
