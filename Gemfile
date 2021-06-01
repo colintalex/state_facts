@@ -15,6 +15,7 @@ gem 'jquery-rails', '~> 4.4'
 gem 'leaflet-rails', '~> 1.7'
 gem 'terser', '~> 1.1', '>= 1.1.3'
 gem 'turbolinks'
+gem 'active_model_serializers', '~> 0.10.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -26,6 +27,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 4.2'
   gem "capybara"
   gem "pry"
+  gem 'launchy', '~> 2.4', '>= 2.4.3'
 end
 
 group :development do
