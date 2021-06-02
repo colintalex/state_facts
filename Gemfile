@@ -31,8 +31,12 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.1'
   gem 'shoulda-matchers', '~> 4.2'
   gem "capybara"
+  gem "jasmine"
   gem "pry"
+  gem 'launchy'
 end
+
+gem 'simplecov', require: false, group: :test
 
 group :development do
   gem 'annotate', '~> 3.0', '>= 3.0.3'
