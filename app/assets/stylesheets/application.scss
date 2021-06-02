@@ -50,6 +50,19 @@
     src: url('/assets/ChambersSansOT.otf');
 }
 
+body {
+    height: 100vh;
+}
+
+.leaflet-touch .leaflet-control-zoom-display {
+    height: 35px;
+    width: 35px;
+    line-height: 30px;
+    text-align: center;
+    background: white;
+    font-size: 1.3em;
+}
+
 #page-header{
     height: auto;
     background: rgb(37,37,37);
