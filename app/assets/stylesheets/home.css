@@ -66,6 +66,11 @@
   font-family: 'ChambersSansOT-Bold';
 }
 
+#state-content {
+    max-height: 65vh;
+    overflow: scroll;
+}
+
 #state-flag-image {
   height: 100px;
   display: inline;
