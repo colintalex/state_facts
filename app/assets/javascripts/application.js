@@ -43,13 +43,15 @@ function makeResizableDiv() {
         e.preventDefault()
         window.addEventListener('mousemove', resize)
         window.addEventListener('mouseup', stopResize)
-        console.log(window.innerWidth)
     })
-
+    
     function resize(e) {
-        element1.style.width = element1.getBoundingClientRect().right - e.pageX + 'px'
+        var dividerPercentage = ( e.pageX / window.innerWidth ) * 100
+        if (dividerPercentage < 75 & dividerPercentage > 25){
+            element1.style.width = element1.getBoundingClientRect().right - e.pageX + 'px'
             element2.style.width = e.pageX + element2.getBoundingClientRect().left + 'px'
-        console.log(e.pageX,element1.style.width, element2.style.width)
+            console.log(e.pageX,element1.style.width, element2.style.width)
+        }
     }
 
     function stopResize() {

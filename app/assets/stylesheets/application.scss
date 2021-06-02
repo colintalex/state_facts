@@ -50,17 +50,36 @@
     src: url('/assets/ChambersSansOT.otf');
 }
 
+body {
+    height: 100vh;
+}
+
+.leaflet-touch .leaflet-control-zoom-display {
+    height: 35px;
+    width: 35px;
+    line-height: 30px;
+    text-align: center;
+    background: white;
+    font-size: 1.3em;
+}
+
+.leaflet-touch .leaflet-control-zoomhome a {
+    font-size: 1.5em;
+}
+
 #page-header{
-    height: auto;
+    height: 10vh;
+    min-height: 45px;
     background: rgb(37,37,37);
     background: linear-gradient(90deg, rgba(37,37,37,1) 50%, rgb(58, 58, 58) 100%);
-    padding: 15px 0 15px 40px;
+    padding: 10px 0 0 40px;
 }
 
 #header-logo{
     vertical-align: middle;
     display: inline-block;
     padding-right: 30px;
+    height: 7vh;
 }
 
 #header-text{

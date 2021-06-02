@@ -12,20 +12,28 @@
 
 #map {
   /* position: absolute; top: 0; left: 0; */
-  height: 93vh;
+  height: 90vh;
   width: 70%;
   max-width: none !important;
 }
 
+
 #divider {
-  height: 93vh;
+  height: 90vh;
   width: 5px;
   background-color: gray;
   z-index: 5000;
+  cursor: col-resize;
 }
 
 #label{
-  margin-left: 10px;
+  color: blue;
+  font-family:  Arial, Helvetica, sans-serif;
+}
+
+#label img {
+  height: 15px;
+  vertical-align: middle;
 }
 
 #state-info {
@@ -33,11 +41,11 @@
   min-width: none !important;
   width: 30%;
   max-width: none !important;
-  height: 93vh;
+  height: 90vh;
   background: beige;
   position: absolute ; top: 0; right: 0;
-  /* z-index: 50000; */
   font-family: 'ChambersSansOT-Black';
+  font-size: 0.9em;
 }
 
 #search-container {
@@ -64,6 +72,11 @@
   height: 36px;
   vertical-align: middle;
   font-family: 'ChambersSansOT-Bold';
+}
+
+#state-content {
+    max-height: 65vh;
+    overflow: scroll;
 }
 
 #state-flag-image {
