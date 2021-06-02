@@ -57,7 +57,7 @@ puts "Seeding DB..."
     NM.facts.create(
         title: "Billy the Kid’s Black Hill Hideout",
         details: "Used as hideout in 1880 for Billy and three members of his gang",
-        lat: 36.55761242008017,
-        lng: -105.41679801330899
+        lat: 32.332083274067955, 
+        lng: -106.58768884490674
     )
 puts "Seeding complete."
