@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: state_facts_production
-  user_name: <%= Rails.application.credentials.db_user %>
+  username: <%= Rails.application.credentials.db_user %>
   password: <%= Rails.application.credentials.db_password %>
