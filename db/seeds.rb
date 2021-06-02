@@ -36,8 +36,8 @@ puts "Seeding DB..."
     CO.facts.create(
         title: "The largest single event in the entire state: the Colorado State Fair & Rodeo.",
         details: "Occurs yearly in Pueblo, CO ever since 1872.",
-        lat: 37.831519351822315,
-        lng: -107.72417215942954
+        lat: 38.248715093584174,
+        lng: -104.6430379774403
     )
 
 
@@ -75,7 +75,7 @@ puts "Seeding DB..."
     NM.facts.create(
         title: "New Mexico state capitol is a city unlike any other.",
         details: "Founded in 1610, the city is the NM's 4th largest city.",
-        lat: 32.332083274067955, 
-        lng: -106.58768884490674
+        lat: 35.66016056209021,
+        lng: -105.97514232273281
     )
 puts "Seeding complete."
