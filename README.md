@@ -2,7 +2,7 @@
 
 Explore interesting facts about a selected state, and get the opportunity to see these point's of interest with pinpoint map markers. 
 
-![AppPreview](/assets/images/app_preview.png)
+![AppPreview](app/assets/images/app_preview.png))
  
 
 
