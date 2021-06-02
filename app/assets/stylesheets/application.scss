@@ -64,16 +64,18 @@ body {
 }
 
 #page-header{
-    height: auto;
+    height: 10vh;
+    min-height: 45px;
     background: rgb(37,37,37);
     background: linear-gradient(90deg, rgba(37,37,37,1) 50%, rgb(58, 58, 58) 100%);
-    padding: 15px 0 15px 40px;
+    padding: 10px 0 0 40px;
 }
 
 #header-logo{
     vertical-align: middle;
     display: inline-block;
     padding-right: 30px;
+    height: 7vh;
 }
 
 #header-text{
