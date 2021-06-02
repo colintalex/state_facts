@@ -3,12 +3,12 @@
     <div id="divider"></div>
     <div class="container ui-widget" id='state-info'>
         <div id="search-container">
-            <div id='label--container'>
+            <div id='label-container'>
                 <p id='label'>drag edge to resize</p>
             </div>
             <div id="dropdown-wrapper">
                 <h6 class="menu-header">States:</h6>
-                <select id="myselect" label='states'>
+                <select id="myselect" name='states'>
                     <%= @state_names.each do |s| %>
                         <option value=<%= s[:id] %>>
                             <%= s[:name] %>
