@@ -1,24 +1,26 @@
-# README
+# README - State Facts App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Explore interesting facts about a selected state, and get the opportunity to see these point's of interest with pinpoint map markers. 
 
-Things you may want to cover:
+## Deployment
 
-* Ruby version
+See the application live: link here
 
-* System dependencies
+## Local Setup
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Clone down repository:
+```
+https://github.com/colintalex/state_facts.git
+```
+Install Gems/Dependancies
+```
+bundle install
+```
+Create and Seed Database
+```
+rails db:{create,seed}
+```
+Explore app on localhost:3000
+```
+rails s
+```
