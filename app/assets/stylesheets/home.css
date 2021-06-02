@@ -38,7 +38,6 @@
 
 #state-info {
   padding: 0 20px;
-  min-width: none !important;
   width: 30%;
   max-width: none !important;
   height: 90vh;
@@ -81,14 +80,14 @@
 
 #state-flag-image {
   height: 100px;
+  margin-right: 10px;
   display: inline;
 }
 
 #state-name{
   font-size: 3em;
-  display: inline;
+  display: inline-block;
   vertical-align: bottom;
-  margin-left: 15px;
   font-family: 'ChambersSansOT-Black';
 }
 
