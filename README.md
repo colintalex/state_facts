@@ -8,7 +8,7 @@ Explore interesting facts about a selected state, and get the opportunity to see
 
 ## Deployment
 
-See the application live: link here
+See the application live: https://alexander-state-facts.herokuapp.com/
 
 ## Local Setup
 
