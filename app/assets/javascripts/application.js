@@ -7,10 +7,7 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
-//= require jquery-ui
-//= require jquery-ui/core
-//= require jquery-ui/widget
-//= require jquery-ui/position
+
 
 var activeStates = []
 
