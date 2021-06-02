@@ -9,10 +9,10 @@
 var map;
 
 var defaultMapParams = {
-    lat: 40,
-    lng: -104.991531,
-    zoom: 5,
-    minZoom: 1,
+    lat: 36.647822580050075,
+    lng: -105.96702386501545,
+    zoom: 6,
+    minZoom: 4,
     maxZoom: 24,
     preferCanvas: true,
     zoomHomeControl: true,
