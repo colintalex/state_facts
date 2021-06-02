@@ -36,8 +36,8 @@ puts "Seeding DB..."
     CO.facts.create(
         title: "The largest single event in the entire state: the Colorado State Fair & Rodeo.",
         details: "Occurs yearly in Pueblo, CO ever since 1872.",
-        lat: 37.831519351822315,
-        lng: -107.72417215942954
+        lat: 38.248715093584174,
+        lng: -104.6430379774403
     )
 
 
