@@ -49,3 +49,25 @@
     font-family: 'ChambersSansOT';
     src: url('/assets/ChambersSansOT.otf');
 }
+
+#page-header{
+    height: auto;
+    background: rgb(37,37,37);
+    background: linear-gradient(90deg, rgba(37,37,37,1) 50%, rgb(58, 58, 58) 100%);
+    padding: 15px 0 15px 40px;
+}
+
+#header-logo{
+    vertical-align: middle;
+    display: inline-block;
+    padding-right: 30px;
+}
+
+#header-text{
+    color: #f0f0f0;
+    display: inline;
+    font-family: 'ChambersSansOT-Bold';
+    font-size: 1.6em;
+    letter-spacing: 2px;
+    vertical-align: middle;
+}

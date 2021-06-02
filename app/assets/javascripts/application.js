@@ -8,6 +8,7 @@
 //= require popper
 //= require bootstrap-sprockets
 
+
 var activeStates = []
 
 var geojsonMarkerOptions = {
@@ -22,7 +23,6 @@ var geojsonMarkerOptions = {
 $(document).ready(function () {
     checkActiveStates()
     buildMap(params = {})
-
     // Creates map layer for markers
     var markerLayer = L.layerGroup().addTo(map)
 
@@ -31,8 +31,31 @@ $(document).ready(function () {
 
     // Adds marker on click, passes in layer for marker clearing
     clickAddMarkerToLayer(markerLayer)
+    
+    makeResizableDiv();
 })
 
+function makeResizableDiv() {
+    const element1 = document.querySelector('#state-info');
+    const element2 = document.querySelector('#map');
+    const divider = document.querySelector('#divider')
+    divider.addEventListener('mousedown', function (e) {
+        e.preventDefault()
+        window.addEventListener('mousemove', resize)
+        window.addEventListener('mouseup', stopResize)
+        console.log(window.innerWidth)
+    })
+
+    function resize(e) {
+        element1.style.width = element1.getBoundingClientRect().right - e.pageX + 'px'
+            element2.style.width = e.pageX + element2.getBoundingClientRect().left + 'px'
+        console.log(e.pageX,element1.style.width, element2.style.width)
+    }
+
+    function stopResize() {
+        window.removeEventListener('mousemove', resize)
+    }
+}
 
 function checkActiveStates() {
     $('#myselect option').map((index, option) => activeStates.push((option.text)))

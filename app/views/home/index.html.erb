@@ -1,12 +1,14 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
 <div class="container-fluid" id='main-container'>
-    <div id='map'></div>
-    <div class="container" id='state-info'>
-        <div class="container-fluid" id="search-container">
+    <div class="ui-widget" id='map'></div>
+    <div id="divider"></div>
+    <div class="container ui-widget" id='state-info'>
+        <div id="search-container">
+            <div id='label-container'>
+                <p id='label'>drag edge to resize</p>
+            </div>
             <div id="dropdown-wrapper">
                 <h6 class="menu-header">States:</h6>
-                <select id="myselect" label='states'>
+                <select id="myselect" name='states'>
                     <%= @state_names.each do |s| %>
                         <option value=<%= s[:id] %>>
                             <%= s[:name] %>
