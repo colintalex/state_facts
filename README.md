@@ -2,9 +2,13 @@
 
 Explore interesting facts about a selected state, and get the opportunity to see these point's of interest with pinpoint map markers. 
 
+![AppPreview](app/assets/images/app_preview.png))
+ 
+
+
 ## Deployment
 
-See the application live: link here
+See the application live: https://alexander-state-facts.herokuapp.com/
 
 ## Local Setup
 
