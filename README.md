@@ -24,6 +24,10 @@ Create and Seed Database
 ```
 rails db:{create,seed}
 ```
+Run Tests
+```
+bundle exec rspec
+```
 Explore app on localhost:3000
 ```
 rails s
