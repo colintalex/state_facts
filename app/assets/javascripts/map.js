@@ -1,4 +1,5 @@
 //= require leaflet
+//= require index
 
 // https://leafletjs.com/reference-1.7.1.html#map-example
 // create a rails element called "map"
@@ -60,6 +61,8 @@ function buildMap(params = {}) {
 
     if (mapParams["fullScreenControl"])
         map.addControl(new L.Control.Fullscreen());
+
+    L.control.multiMeasure().addTo(map);
 }
 
 

@@ -13,7 +13,7 @@
  *= require_self
  *= require leaflet
  *= require font-awesome
- *=require home
+ *= require_tree .
  */
 @import "bootstrap";
 

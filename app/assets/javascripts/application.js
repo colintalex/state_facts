@@ -1,12 +1,12 @@
 //= require rails-ujs
 //= require turbolinks
-//= require_tree .
 //= require jquery
 //= require jquery_ujs
 //= require leaflet
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+//= require_tree .
 
 
 var activeStates = []
@@ -36,6 +36,7 @@ $(document).ready(function () {
 })
 
 function makeResizableDiv() {
+    
     const element1 = document.querySelector('#state-info');
     const element2 = document.querySelector('#map');
     const divider = document.querySelector('#divider')
