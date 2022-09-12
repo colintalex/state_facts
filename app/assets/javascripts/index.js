@@ -9,12 +9,14 @@ L.Control.MultiMeasure = L.Control.extend({
   },
   initialize: function (options) {
     L.setOptions(this, options);
+    this.options.units = L.extend({}, units, this.options.units);
   },
   onAdd: function (map) {
     this._map = map;
     this._layer = L.featureGroup().addTo(this._map);
     this._tempLayer = L.featureGroup().addTo(this._layer);
     this._tempPoints = L.featureGroup().addTo(this._layer);
+    this._subcursor = L.circleMarker(map.getCenter(), {color: 'transparent'}).addTo(this._tempLayer);
     this._layerHistory = [];
 
     const container = this._container = L.DomUtil.create(
@@ -81,6 +83,11 @@ L.Control.MultiMeasure = L.Control.extend({
     this._layer.clearLayers();
     this._tempLayer.clearLayers().addTo(this._layer);
     this._tempPoints.clearLayers().addTo(this._layer);
+        this._tempLayer.clearLayers();
+        this._tempArea.addTo(this._tempLayer);
+        this._tempLine.setLatLngs([]);
+        this._tempArea.setLatLngs([]);
+        this._subcursor.addTo(this._tempLayer);
     this._layerHistory = [];
     this._handleEditControls();
   },
@@ -115,6 +122,12 @@ L.Control.MultiMeasure = L.Control.extend({
     this._measure_actions.setAttribute("style", "display:none;");
     this._measure_start_menu.removeAttribute("style");
   },
+  _showSave: function(){
+
+  },
+  _hideSave: function(){
+
+  },
   _measure: function(evt) {
     this._measure_type = evt.target.id;
     this._enableMeasureView();
@@ -122,25 +135,28 @@ L.Control.MultiMeasure = L.Control.extend({
   _enableMeasureView: function() {
     switch(this._measure_type){
       case 'start-point':
-        this._startPoint();
+        this._measure_start_menu.setAttribute("style", "display:none;");
+        this._outputs.removeAttribute("style");
+        this._measure_actions.removeAttribute("style");
+        this._subcursor.on("click", this._placeMarker, this);
+        this._map.on("mousemove", this._updateSubCursorPos, this);
+        this._outputs.innerHTML = pointStartTemplate();
         break;
       case 'start-line':
         this._measure_start_menu.setAttribute("style", "display:none;");
         this._outputs.removeAttribute("style");
         this._measure_actions.removeAttribute("style");
-        this._subcursor = L.circleMarker(this._map.getCenter()).addTo(this._layer);
         this._subcursor.on("click", this._placeLinePoint, this);
         this._map.on("mousemove", this._updateSubCursorPos, this);
+        this._outputs.innerHTML = lineStartTemplate();
         break;
       case 'start-area':
         this._measure_start_menu.setAttribute("style", "display:none;");
         this._outputs.removeAttribute("style");
         this._measure_actions.removeAttribute("style");
-        this._subcursor = L.circleMarker(this._map.getCenter()).addTo(
-          this._layer
-        );
         this._subcursor.on("click", this._placeLinePoint, this);
         this._map.on("mousemove", this._updateSubCursorPos, this);
+        this._outputs.innerHTML = areaStartTemplate();
         break;
     }
   },
@@ -155,73 +171,80 @@ L.Control.MultiMeasure = L.Control.extend({
     this._subcursor.off('click', this._placeLinePoint, this)
     this._map.off("mousemove", this._updateSubCursorPos, this);
     this._tempLayer.clearLayers();
+    this._tempArea.addTo(this._tempLayer)
+    this._tempLine.setLatLngs([]);
+    this._tempArea.setLatLngs([]);
+    this._subcursor.addTo(this._tempLayer);
     this._tempPoints.clearLayers();
   },
   _startPoint: function () {
-    this._subcursor = L.circleMarker(this._map.getCenter()).addTo(this._layer)
-    this._measure_start_menu.setAttribute("style", "display:none;");
-    this._outputs.removeAttribute("style");
-    this._measure_actions.removeAttribute("style");
 
-    this._subcursor.on('click', this._placeMarker, this)
-    
-    this._map.on('mousemove', this._updateSubCursorPos, this)
   },
   _updateSubCursorPos: function(evt){
     if(!this._subcursor){
-      this._subcursor = new L.CircleMarker(evt.latlng, {opacity: 0}).addTo(this._tempLayer);
+      this._subcursor = L.circleMarker(evt.latlng, {opacity: 1.0}).addTo(this._tempLayer);
     }else{
       this._subcursor.setLatLng(evt.latlng)
     }
   },
   _placeMarker: function(evt) {
     if (!this._tempMarker) {
-      this._tempMarker = new L.CircleMarker(evt.latlng).addTo(this._tempLayer);
+      this._tempMarker = new L.CircleMarker(evt.latlng, {radius: 6}).addTo(this._tempLayer);
     }
     this._tempMarker.addTo(this._tempLayer);
     this._tempMarker.setLatLng(evt.latlng);
 
     // Update Output Template
-    this._outputs.innerHTML = resultsTemplate(evt.latlng)
+    this._outputs.innerHTML = pointResultsTemplate(evt.latlng)
   },
   _placeLinePoint: function(evt){
+    L.circleMarker(evt.latlng, {radius: 6}).addTo(this._tempPoints);
     if (!this._tempLine) {
       this._tempLine = new L.Polyline([evt.latlng])
     }else{
     this._tempLine.addLatLng(evt.latlng);
     }
+
     if(!this._tempLayer.hasLayer(this._tempLine)){
       this._tempLine.addTo(this._tempLayer);
     }
-    L.circleMarker(evt.latlng).addTo(this._tempPoints);
     var line_parts = this._tempLine.toGeoJSON().geometry.coordinates;
-    if (line_parts.length > 1){
+
+    if (this._measure_type == "start-line" && line_parts.length > 1) {
       var line = turf.lineString(line_parts);
       var length = turf.length(line, { units: "miles" });
-      console.log(this._measure_type)
-      if (this._measure_type == 'start-area' && line_parts.length > 2){
-        line_parts.push(line_parts[0]);
-        var polygon = turf.polygon([line_parts]);
-        var area = turf.area(polygon);
-        this._outputs.innerHTML = resultsTemplate(area, 'Area');
-
-        this._tempArea ||= L.polygon([], { color: "red" }).addTo(this._tempLayer);     
-        this._tempArea.setLatLngs(this._tempLine.getLatLngs());
-      }
+      this._outputs.innerHTML = lineResultsTemplate(length);
     }
+    if (this._measure_type == 'start-area' && line_parts.length > 2){
+      var temp_parts = line_parts
+      temp_parts.push(temp_parts[0]);
+      var polygon = turf.polygon([temp_parts]);
+      var area = turf.area(polygon);
+      var miles = area / 2589988.11;
+      this._outputs.innerHTML = areaResultsTemplate(miles);
+
+      if (this._tempArea == undefined) {
+        this._tempArea = L.polygon(line_parts, { color: "blue", stroke: false }).addTo(this._tempLayer);     
+      }
+      this._tempArea.setLatLngs(this._tempLine.getLatLngs());
+    }
+
   },
   _saveMeasure: function () {
     switch(this._measure_type){
       case 'start-point':
         var coords = this._tempMarker.getLatLng();
         var marker = L.circleMarker(coords, {color: 'green'}).addTo(this._layer)
+        marker.bindPopup(pointOutputTemplate(coords)).openPopup();
         this._layerHistory.push(marker._leaflet_id);
         this._tempLayer.clearLayers();
+        this._subcursor.addTo(this._tempLayer);
+        this._outputs.innerHTML = pointStartTemplate();
         break;
       case 'start-line':
           var path = L.featureGroup();
           this._tempPoints.getLayers().forEach(lyr => {
-            L.circleMarker(lyr.getLatLng(), {color: 'green'}).addTo(path);
+            L.circleMarker(lyr.getLatLng(), {color: "green"}).addTo(path);
           });
           var line_parts = this._tempLine.toGeoJSON().geometry.coordinates;
           var line = turf.lineString(line_parts);
@@ -232,23 +255,24 @@ L.Control.MultiMeasure = L.Control.extend({
           this._layerHistory.push(path._leaflet_id);
           this._tempPoints.clearLayers();
           this._tempLine.setLatLngs([]);
-          this._outputs.innerHTML = resultsTemplate(null);
+          this._outputs.innerHTML = lineStartTemplate();
         break;
-        case 'start-area':
+      case 'start-area':
           var path = L.featureGroup();
           this._tempPoints.getLayers().forEach(lyr => {
             L.circleMarker(lyr.getLatLng(), {color: 'green'}).addTo(path);
           });
           var line_parts = this._tempLine.toGeoJSON().geometry.coordinates;
-          var line = turf.lineString(line_parts);
-          var length = turf.length(line, { units: "miles" });
+          line_parts.push(line_parts[0])
+          var area = turf.area(turf.polygon([line_parts])) / 2589988.11;
+          this._outputs.innerHTML = areaStartTemplate(area);
+
           var polyline = L.polygon(this._tempLine.getLatLngs(), {color: 'green'}).addTo(path);
           path.addTo(this._layer);
-          polyline.bindPopup(outputTemplate(length, 'Length')).openPopup();
+          polyline.bindPopup(areaOutputTemplate(area)).openPopup();
           this._layerHistory.push(path._leaflet_id);
           this._tempPoints.clearLayers();
           this._tempLine.setLatLngs([]);
-          this._outputs.innerHTML = resultsTemplate(null);
         break;
     }
 
