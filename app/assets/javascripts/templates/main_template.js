@@ -1,12 +1,12 @@
 function mainTemplate(model) {
-  const title = "2D Measure Tool";
+  const title = "2D Measure";
   return `
     <a class="measure-toggle" href="#">
       ${rulerIcon()}
     </a>
     <div class='leaflet-multi-measure-controls'>
       ${closeIcon()}
-      <h3 class="heading">2D Measure Tool</h3>
+      <h3 class="heading">2D Measure</h3>
         ${startMenu()}
       <div class="measure-output">
       </div>
@@ -19,33 +19,33 @@ function mainTemplate(model) {
 
 function areaStartTemplate(){
   return `
-  <h6>Area</h6>
-  <p>Place 3 or more points to measure area</p>`
+  <p class='measure-title'>Area</p>
+  <p>Place 3 or more points</p>`
 }
 function areaResultsTemplate(area){
   return `
-  <h6>Area</h6>
-  ${area.toFixed(2)} sq/miles`;
+  <p class='measure-title'>Area</p>
+  <p class='measure-results'>${area.toFixed(2)} sq/miles</p>`;
 }
 function pointStartTemplate(){
   return `
-  <h6>Point</h6>
+  <p class='measure-title'>Point</p>
   <p>Click map to measure point.</p>`;
 }
 function pointResultsTemplate(coords = {lat: 0.0, lng: 0.0}){
   return `
-  <h6>Point</h6>
-  ${coords.lat.toFixed(5)} / ${coords.lng.toFixed(5)}`;
+  <p class='measure-title'>Point</p>
+  <p class='measure-results'>${coords.lat.toFixed(5)} / ${coords.lng.toFixed(5)}</>`;
 }
 function lineStartTemplate(){
   return `
-  <h6>Line</h6>
-  <p>Place 2 or more points to measure</p>`;
+  <p class='measure-title'>Line</p>
+  <p>Place 2 or more points</p>`;
 }
 function lineResultsTemplate(length){
   return `
-  <h6>Line</h6>
-  ${length.toFixed(2)} miles`;
+  <p class='measure-title'>Line</p>
+  <p class='measure-results'>${length.toFixed(2)} miles</p>`;
 }
 
 function measureActions(){
@@ -55,7 +55,7 @@ function measureActions(){
         Save Measurement
       </li>
       <li id='cancel' class='link'>
-        Cancel
+        Change Measure Type
       </li>
     </ul>`;
 }

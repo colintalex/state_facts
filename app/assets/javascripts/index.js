@@ -47,6 +47,7 @@ L.Control.MultiMeasure = L.Control.extend({
     const measure_start_menu = controls.querySelector(".measure-start-menu");
     const measure_actions = controls.querySelector(".measure-actions");
     this._toggle = toggle;
+    this._close = close;
     this._cancel = cancel;
     this._controls = controls;
     this._outputs = outputs;
@@ -57,7 +58,7 @@ L.Control.MultiMeasure = L.Control.extend({
     L.DomEvent.on(container, 'mouseover', L.DomEvent.stop);
     L.DomEvent.on(container, 'mouseover', function(e){
       if(this._subcursor){
-        this._subcursor.off('click mousemove');
+        this._subcursor.off('click');
       }
     });
     L.DomEvent.on(container, 'mouseout', function(e){
@@ -162,7 +163,8 @@ L.Control.MultiMeasure = L.Control.extend({
     this._measure_type = evt.target.id;
     this._subcursor.addTo(map);
     this._tempLayer.addTo(this._map);
-    L.DomEvent.off(this._container, 'click', this._collapse, this);
+    L.DomEvent.off(this._close, "click", this._collapse, this);
+
     this._enableMeasureView();
   },
   _enableMeasureView: function() {
@@ -211,9 +213,8 @@ L.Control.MultiMeasure = L.Control.extend({
     this._tempPoints.clearLayers();
     this._subcursor.off("click");
     this._map.off("mousemove", this._updateSubCursorPos, this);
-    L.DomEvent.on(this._container, "click", this._collapse, this);
+    L.DomEvent.on(this._close, "click", this._collapse, this);
     this._save.classList.add("measure-hidden");
-
 
   },
   _updateSubCursorPos: function(evt){
@@ -316,6 +317,7 @@ L.Control.MultiMeasure = L.Control.extend({
           this._tempLine.setLatLngs([]);
         break;
     }
+    L.DomEvent.on(this._close, "click", this._collapse, this);
 
   }
 });
