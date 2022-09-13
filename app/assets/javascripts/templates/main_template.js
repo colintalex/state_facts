@@ -22,30 +22,33 @@ function areaStartTemplate(){
   <p class='measure-title'>Area</p>
   <p>Place 3 or more points</p>`
 }
-function areaResultsTemplate(area){
+function areaResultsTemplate(area, secondary = 'secondary units'){
   return `
   <p class='measure-title'>Area</p>
-  <p class='measure-results'>${area.toFixed(2)} sq/miles</p>`;
+  <p class='measure-results'>${area.toFixed(2)} sq/miles</p>
+  <p class='measure-results secondary'>${secondary}</p>`;
 }
 function pointStartTemplate(){
   return `
   <p class='measure-title'>Point</p>
   <p>Click map to measure point.</p>`;
 }
-function pointResultsTemplate(coords = {lat: 0.0, lng: 0.0}){
+function pointResultsTemplate(coords = {lat: 0.0, lng: 0.0}, secondary = 'secondary units'){
   return `
   <p class='measure-title'>Point</p>
-  <p class='measure-results'>${coords.lat.toFixed(5)} / ${coords.lng.toFixed(5)}</>`;
+  <p class='measure-results'>${coords.lat.toFixed(5)} / ${coords.lng.toFixed(5)}</>
+  <p class='measure-results secondary'>${secondary}</>`;
 }
 function lineStartTemplate(){
   return `
   <p class='measure-title'>Line</p>
   <p>Place 2 or more points</p>`;
 }
-function lineResultsTemplate(length){
+function lineResultsTemplate(length, secondary = 'secondary units'){
   return `
   <p class='measure-title'>Line</p>
-  <p class='measure-results'>${length.toFixed(2)} miles</p>`;
+  <p class='measure-results'>${length.toFixed(2)} miles</p>
+  <p class='measure-results secondary'>${secondary}</p>`;
 }
 
 function measureActions(){
@@ -54,8 +57,11 @@ function measureActions(){
       <li id='save' class='link measure-hidden'>
         Save Measurement
       </li>
+      <li id='undo-point' class='link measure-hidden'>
+        Undo Last Point
+      </li>
       <li id='cancel' class='link'>
-        Change Measure Type
+        Cancel This Measure
       </li>
     </ul>`;
 }
