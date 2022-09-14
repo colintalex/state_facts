@@ -34,20 +34,21 @@ L.Control.MultiMeasure = L.Control.extend({
     const pointStart = container.querySelector('#start-point');
     const lineStart = container.querySelector('#start-line');
     const areaStart = container.querySelector('#start-area');
-
     const toggle = container.querySelector('.measure-toggle');
     const cancel = container.querySelector('.link#cancel');
     const delete_all = container.querySelector('.link#delete-all');
     const undo = container.querySelector('.link#undo-last');
     const save = container.querySelector('.link#save');
     const close = container.querySelector('#close-icon');
-    this._save = save;
-    this._edit_controls = container.querySelectorAll('.link.existing');
-    this._undo_point = container.querySelector('.link#undo-point');
+    const edit_controls = container.querySelectorAll('.link.existing');
+    const undo_point = container.querySelector('.link#undo-point');
     const controls = container.querySelector(".leaflet-multi-measure-controls");
     const outputs = container.querySelector(".measure-output");
     const measure_start_menu = controls.querySelector(".measure-start-menu");
     const measure_actions = controls.querySelector(".measure-actions");
+    this._edit_controls = edit_controls;
+    this._undo_point = undo_point;
+    this._save = save;
     this._toggle = toggle;
     this._close = close;
     this._cancel = cancel;
@@ -58,25 +59,14 @@ L.Control.MultiMeasure = L.Control.extend({
     this._collapse();
 
     L.DomEvent.on(container, 'mouseover', L.DomEvent.stop);
-    L.DomEvent.on(container, 'mouseover', function(e){
-      if(this._subcursor){
-        this._subcursor.off('click');
-      }
-    });
-    L.DomEvent.on(container, 'mouseout', function(e){
-      let type = this._measure_type
-      if(type == 'start-point'){
-        this._subcursor.on("click", this._placeMarker, this);
-      }
-      if(type == 'start-line' || type == 'start-area'){
-        this._subcursor.on("click", this._placeMarker, this);
-      }
-    });
+    L.DomEvent.on(container, 'mouseover', this._disableSubCursor);
+    L.DomEvent.on(container, 'mouseout', this._enableSubCursor);
     
     L.DomEvent.on(toggle, 'click', L.DomEvent.stop);
     L.DomEvent.on(toggle, 'click', this._expand, this);
     L.DomEvent.on(close, 'click', L.DomEvent.stop);
     L.DomEvent.on(close, 'click', this._collapse, this);
+    
     L.DomEvent.on(pointStart, 'click', L.DomEvent.stop);
     L.DomEvent.on(pointStart, 'click', this._measure, this);
     L.DomEvent.on(lineStart, 'click', L.DomEvent.stop);
@@ -97,6 +87,20 @@ L.Control.MultiMeasure = L.Control.extend({
     L.DomEvent.on(this._undo_point, "click", this._removeLastPoint, this);
 
     return this._container;
+  },
+  _disableSubCursor: function(){
+    if(this._subcursor){
+      this._subcursor.off('click');
+    }
+  },
+  _enableSubCursor: function() {
+    let type = this._measure_type;
+    if (type == "start-point") {
+      this._subcursor.on("click", this._placeMarker, this);
+    }
+    if (type == "start-line" || type == "start-area") {
+      this._subcursor.on("click", this._placeMarker, this);
+    }
   },
   _unHighlightLast: function(){
     let last_layer = this._layerHistory[this._layerHistory.length - 1]
@@ -164,7 +168,7 @@ L.Control.MultiMeasure = L.Control.extend({
   },
   _measure: function(evt) {
     this._measure_type = evt.target.id;
-    this._subcursor.addTo(map);
+    this._subcursor.addTo(this._map);
     this._tempLayer.addTo(this._map);
     L.DomEvent.off(this._close, "click", this._collapse, this);
 
