@@ -11,6 +11,8 @@ gem 'puma-daemon', '~> 0.1.2', require: false
 gem 'sass-rails', '>= 5'
 gem 'sprockets', '~> 4'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
+gem 'turf-rails'
+
 
 gem 'awesome_print', '~> 1.8'
 gem 'bootsnap', '>= 1.4.2', require: false

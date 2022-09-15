@@ -3,6 +3,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require leaflet
+//= require turf
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets

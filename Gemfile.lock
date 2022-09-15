@@ -259,6 +259,7 @@ GEM
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
+    turf-rails (5.1.6.1)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     web-console (4.1.0)
@@ -312,6 +313,7 @@ DEPENDENCIES
   sprockets-rails
   terser (~> 1.1, >= 1.1.3)
   turbolinks
+  turf-rails
   tzinfo-data
   web-console (>= 3.3.0)
 
