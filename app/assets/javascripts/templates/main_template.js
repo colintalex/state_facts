@@ -1,9 +1,9 @@
 function mainTemplate(model) {
-  const title = "2D Measure";
   let list = Object.keys(units);
   let test = list.map((e) => {
-    return `<a href="#">${e}</a>`;
+    return `<li class="dropdown-item" id="${e}">${e}</li>`;
   });
+
   return `
     <a class="measure-toggle" href="#">
       ${rulerIcon()}
@@ -20,20 +20,20 @@ function mainTemplate(model) {
       <div class="units-dislay">
         <div class='units-select-container primary'>
           Primary:
-          <div class="dropdown select-units">
-            <button class="dropbtn">miles</button>
-            <div class="dropdown-content">
+          <div class="dropdown primary select-units">
+            <button class="dropbtn primary">miles</button>
+            <ul class="dropdown-content measure-hidden primary">
               ${test.toString().replaceAll(",", "")}
-            </div>
+            </ul>
           </div>
         </div>
         <div class='units-select-container secondary'>
           Secondary:
-          <div class="dropdown select-units">
-            <button class="dropbtn">miles</button>
-            <div class="dropdown-content">
+          <div class="dropdown select-units secondary">
+            <button class="dropbtn secondary">miles</button>
+            <ul class="dropdown-content measure-hidden secondary">
               ${test.toString().replaceAll(",", "")}
-            </div>
+            </ul>
           </div>
         </div>
       </div>

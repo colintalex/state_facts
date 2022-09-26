@@ -51,6 +51,7 @@ L.Control.MultiMeasure = L.Control.extend({
     const outputs = container.querySelector(".measure-output");
     const measure_start_menu = controls.querySelector(".measure-start-menu");
     const measure_actions = controls.querySelector(".measure-actions");
+    const select_units = controls.querySelector(".select-units");
     this._edit_controls = edit_controls;
     this._undo_point = undo_point;
     this._save = save;
@@ -61,6 +62,7 @@ L.Control.MultiMeasure = L.Control.extend({
     this._outputs = outputs;
     this._measure_start_menu = measure_start_menu;
     this._measure_actions = measure_actions;
+    this._select_units = select_units;
     this._collapse();
 
     L.DomEvent.on(container, "mouseover", L.DomEvent.stop);
@@ -191,6 +193,25 @@ L.Control.MultiMeasure = L.Control.extend({
         ele.classList.remove("measure-hidden");
       });
     }
+
+    L.DomEvent.on(this._select_units, 'click', L.DomEvent.stop);
+    L.DomEvent.on(this._select_units, 'click', function(e){
+      $(".dropdown-content.primary")[0].classList.remove("measure-hidden");
+      const items = this._select_units.querySelectorAll(".dropdown-item");
+      
+      $('.dropdown-item').on('click', {model: this}, function(e){
+          L.DomEvent.off(this._select_units, 'click')
+          e.data.model.options.primaryLengthUnit = e.target.id;
+          $(".dropbtn.primary")[0].innerHTML = e.target.id;
+          this.parentElement.classList.add("measure-hidden");
+          $('.dropdown-item').off()
+        })
+
+
+    }, this)
+      // $(".dropbtn").on("click", function (evt) {
+
+      // });
   },
   _enableMeasureType: function (evt) {
     this._measure_type = evt.target.id;
