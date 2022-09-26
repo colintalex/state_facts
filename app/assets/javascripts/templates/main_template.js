@@ -1,5 +1,9 @@
 function mainTemplate(model) {
   const title = "2D Measure";
+  let list = Object.keys(units);
+  let test = list.map((e) => {
+    return `<a href="#">${e}</a>`;
+  });
   return `
     <a class="measure-toggle" href="#">
       ${rulerIcon()}
@@ -12,6 +16,26 @@ function mainTemplate(model) {
       </div>
       <div class="measure-actions">
         ${measureActions()}
+      </div>
+      <div class="units-dislay">
+        <div class='units-select-container primary'>
+          Primary:
+          <div class="dropdown select-units">
+            <button class="dropbtn">miles</button>
+            <div class="dropdown-content">
+              ${test.toString().replaceAll(",", "")}
+            </div>
+          </div>
+        </div>
+        <div class='units-select-container secondary'>
+          Secondary:
+          <div class="dropdown select-units">
+            <button class="dropbtn">miles</button>
+            <div class="dropdown-content">
+              ${test.toString().replaceAll(",", "")}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   `;
@@ -89,6 +113,10 @@ function startMenu() {
       <li id='delete-all' class='link existing'>
         ${polygonIcon()}
         Clear All
+      </li>
+      <li id='change-units' class='link'>
+        ${pointIcon()}
+        Change Units
       </li>
     </ul>
   </div>`;

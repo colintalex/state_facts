@@ -26,6 +26,7 @@ L.Control.MultiMeasure = L.Control.extend({
     this._layerHistory = [];
     this._pointsHistory = [];
 
+    console.log(units)
     const container = (this._container = L.DomUtil.create(
       "div",
       `${this._className} leaflet-bar`
