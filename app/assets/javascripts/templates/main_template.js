@@ -21,7 +21,7 @@ function mainTemplate(model) {
         <div class='units-select-container primary'>
           Primary:
           <div class="dropdown primary select-units">
-            <button class="dropbtn primary">miles</button>
+            <button class="dropbtn primary">${model.options.primaryLengthUnit}</button>
             <ul class="dropdown-content measure-hidden primary">
               ${test.toString().replaceAll(",", "")}
             </ul>
@@ -30,7 +30,7 @@ function mainTemplate(model) {
         <div class='units-select-container secondary'>
           Secondary:
           <div class="dropdown select-units secondary">
-            <button class="dropbtn secondary">miles</button>
+            <button class="dropbtn secondary">${model.options.primaryLengthUnit}</button>
             <ul class="dropdown-content measure-hidden secondary">
               ${test.toString().replaceAll(",", "")}
             </ul>

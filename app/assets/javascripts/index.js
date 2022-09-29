@@ -1,11 +1,60 @@
 //= require leaflet
 
+const units = {
+  acres: {
+    factor: 0.000024711,
+    display: "acres",
+    decimals: 2,
+  },
+  feet: {
+    factor: 0.32808,
+    display: "feet",
+    decimals: 0,
+  },
+  kilometers: {
+    factor: 0.0001,
+    display: "kilometers",
+    decimals: 2,
+  },
+  hectares: {
+    factor: 0.00001,
+    display: "hectares",
+    decimals: 2,
+  },
+  meters: {
+    factor: 1,
+    display: "meters",
+    decimals: 0,
+  },
+  miles: {
+    factor: 0.000621371,
+    display: "miles",
+    decimals: 2,
+  },
+  sqfeet: {
+    factor: 0.107639,
+    display: "sqfeet",
+    decimals: 0,
+  },
+  sqmeters: {
+    factor: 1,
+    display: "sqmeters",
+    decimals: 0,
+  },
+  sqmiles: {
+    factor: 0.0000000386102,
+    display: "sqmiles",
+    decimals: 2,
+  },
+};
+
 L.Control.MultiMeasure = L.Control.extend({
   _className: "leaflet-control-multi-measure",
   options: {
     units: {},
     position: "topleft",
-    primaryLengthUnit: "feet",
+    primaryLengthUnit: "miles",
+    secondaryLengthUnit: "miles",
   },
   initialize: function (options) {
     L.setOptions(this, options);
@@ -195,23 +244,22 @@ L.Control.MultiMeasure = L.Control.extend({
     }
 
     L.DomEvent.on(this._select_units, 'click', L.DomEvent.stop);
-    L.DomEvent.on(this._select_units, 'click', function(e){
-      $(".dropdown-content.primary")[0].classList.remove("measure-hidden");
-      const items = this._select_units.querySelectorAll(".dropdown-item");
-      
-      $('.dropdown-item').on('click', {model: this}, function(e){
-          L.DomEvent.off(this._select_units, 'click')
-          e.data.model.options.primaryLengthUnit = e.target.id;
-          $(".dropbtn.primary")[0].innerHTML = e.target.id;
-          this.parentElement.classList.add("measure-hidden");
-          $('.dropdown-item').off()
-        })
+    L.DomEvent.on(this._select_units, 'click', this._showUnitsMenu, this);
 
 
-    }, this)
-      // $(".dropbtn").on("click", function (evt) {
+  },
+  _showUnitsMenu: function() {
+    $(".dropdown-content.primary")[0].classList.remove("measure-hidden");
+    L.DomEvent.off(this._select_units);
+    L.DomEvent.on(this._select_units, "click", L.DomEvent.stop);
+    L.DomEvent.on(this._select_units, "click", this._hideUnitsMenu, this);
+  },
+  _hideUnitsMenu: function(e) {
+    if (e.target.id == '' ) return;
 
-      // });
+    $(".dropbtn.primary")[0].innerText = e.target.id;
+    this.options.primaryLengthUnit = e.target.id;
+    $(".dropdown-content.primary")[0].classList.add("measure-hidden");
   },
   _enableMeasureType: function (evt) {
     this._measure_type = evt.target.id;
@@ -297,10 +345,13 @@ L.Control.MultiMeasure = L.Control.extend({
     var line_parts = this._tempLine.toGeoJSON().geometry.coordinates;
     if (this._measure_type == "start-line" && line_parts.length > 1) {
       var line = turf.lineString(line_parts);
-      var length = turf.length(line, { units: "miles" });
-      var secondary = turf.length(line, { units: "feet" });
-      this._save.classList.remove("measure-hidden");
-      this._outputs.innerHTML = lineResultsTemplate(length, secondary);
+      var primary_length_meters = turf.length(line, { units: "kilometers" }) * 1000;
+      var secondary_length_meters = turf.length(line, { units: "kilometers" }) * 1000;
+      var p_unit = units[this.options.primaryLengthUnit]
+      var s_unit = units[this.options.secondaryLengthUnit]
+      var primary_length = (primary_length_meters * p_unit.factor);
+      var secondary_length = (secondary_length_meters * s_unit.factor);
+      this._outputs.innerHTML = lineResultsTemplate(primary_length, secondary_length);
     }
     if (this._measure_type == "start-area" && line_parts.length > 2) {
       var temp_parts = line_parts;
