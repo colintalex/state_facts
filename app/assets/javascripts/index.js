@@ -243,10 +243,44 @@ L.Control.MultiMeasure = L.Control.extend({
       });
     }
 
-    L.DomEvent.on(this._select_units, 'click', L.DomEvent.stop);
-    L.DomEvent.on(this._select_units, 'click', this._showUnitsMenu, this);
+    // L.DomEvent.on(this._select_units, 'click', L.DomEvent.stop);
+    // L.DomEvent.on(this._select_units, 'click', this._showUnitsMenu, this);
 
+    $('.dropbtn').on('click', {model: this}, function(e){
+      if (this.classList.contains("primary")){
+        $(".dropdown-content.primary")[0].classList.remove("measure-hidden");
+        $(".dropdown-item").on( "click", { model: e.data.model, dropdown: this }, function (e) {
+            e.data.model.options.primaryLengthUnit = this.textContent;
+            $('.dropdown-content.primary')[0].classList.add("measure-hidden");
+            e.data.model._updatePrimaryUnit(this.textContent, 'primary');
+            $(".dropbtn.primary")[0].innerText = this.textContent;
+            $(".dropdown-item").off('click');
+          }
+        );
+      }else if(this.classList.contains('secondary')){
+        $(".dropdown-content.secondary")[0].classList.remove("measure-hidden");
+        $(".dropdown-item").on( "click", { model: e.data.model, dropdown: this }, function (e) {
+            e.data.model.options.secondaryLengthUnit = this.textContent;
+            $('.dropdown-content.secondary')[0].classList.add("measure-hidden");
+            e.data.model._updatePrimaryUnit(this.textContent, 'secondary');
+            $(".dropbtn.secondary")[0].innerText = this.textContent;
+            $(".dropdown-item").off("click");
 
+          }
+        );
+      }
+    })
+
+  },
+  _updatePrimaryUnit: function (unit_name, type) {
+    switch(type){
+      case 'primary':
+        this.options.primaryLengthUnit =  unit_name
+        break;
+      case 'secondary':
+        this.options.secondaryLengthUnit =  unit_name
+        break;
+    }
   },
   _showUnitsMenu: function() {
     $(".dropdown-content.primary")[0].classList.remove("measure-hidden");
@@ -347,6 +381,7 @@ L.Control.MultiMeasure = L.Control.extend({
       var line = turf.lineString(line_parts);
       var primary_length_meters = turf.length(line, { units: "kilometers" }) * 1000;
       var secondary_length_meters = turf.length(line, { units: "kilometers" }) * 1000;
+      this._save.classList.remove("measure-hidden");
       var p_unit = units[this.options.primaryLengthUnit]
       var s_unit = units[this.options.secondaryLengthUnit]
       var primary_length = (primary_length_meters * p_unit.factor);
@@ -417,7 +452,10 @@ L.Control.MultiMeasure = L.Control.extend({
           color: "green",
         }).addTo(path);
         path.addTo(this._layer);
-        polyline.bindPopup(outputTemplate(length, "Length")).openPopup();
+        var units = {};
+        units[0] = this.options.primaryLengthUnit;
+        units[1] = this.options.secondaryLengthUnit;
+        polyline.bindPopup(outputTemplate(length, units, "Length")).openPopup();
         this._layerHistory.push(path._leaflet_id);
         this._tempPoints.clearLayers();
         this._tempLine.setLatLngs([]);
@@ -431,8 +469,12 @@ L.Control.MultiMeasure = L.Control.extend({
           );
         });
         var line_parts = this._tempLine.toGeoJSON().geometry.coordinates;
+        var units = {}
+        units[0] = this.options.primaryAreaUnit
+        units[1] = this.options.secondaryAreaUnit
         line_parts.push(line_parts[0]);
         var area = turf.area(turf.polygon([line_parts])) / 2589988.11;
+        
         this._outputs.innerHTML = areaStartTemplate(area);
 
         var polyline = L.polygon(this._tempLine.getLatLngs(), {

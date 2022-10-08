@@ -1,14 +1,9 @@
-function outputTemplate(model, title) {
-  var text;
-  if(model == null){
-    text = 0.0000;
-  }else{
-    text = model;
-  }
+function outputTemplate(measurements, units, title) {
   return `
   <div>
     <h3>${title}</h3>
-    <h6>${text.toFixed(2)} miles</h6>
+    <h6>${measurements.toFixed(2)} ${units[0]}</h6>
+    <h6>${measurements.toFixed(2)} ${units[1]}</h6>
   </div>`
 }
 function pointOutputTemplate(coords) {
